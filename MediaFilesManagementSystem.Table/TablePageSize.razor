@@ -1,0 +1,17 @@
+﻿<div class="input-group">
+	<span class="input-group-text">Элементов на странице</span>
+	<input type="number" class="form-control" @bind-value="Pagination.PageSize" />
+</div>
+
+@if (Pagination.PageSize > 50)
+{
+    <div class="fixed-bottom rounded-circle bg-light d-flex align-items-center justify-content-center ms-auto mb-4 me-4" style="width: 75px; height: 75px">
+		<a href="#top" class="text-dark fs-1" style="text-decoration: none">&uarr;</a>
+	</div>
+}
+
+@code {
+	[Parameter]
+	[EditorRequired]
+	public IPagination Pagination { get; init; }
+}

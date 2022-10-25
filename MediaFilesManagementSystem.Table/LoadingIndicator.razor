@@ -1,0 +1,35 @@
+﻿@implements IDisposable
+
+<div class="spinner-border text-primary @(_changing ? "" : "opacity-0")"></div>
+
+@code {
+	private bool _changing;
+
+	[Parameter]
+	[EditorRequired]
+	public IPagination Pagination { get; set; }
+
+	protected override void OnInitialized()
+	{
+		Pagination.CurrentPageItemsChanging += PaginationState_CurrentPageItemsChanging;
+		Pagination.CurrentPageItemsChanged += PaginationState_CurrentPageItemsChanged;
+	}
+
+	public void Dispose()
+	{
+		Pagination.CurrentPageItemsChanging -= PaginationState_CurrentPageItemsChanging;
+		Pagination.CurrentPageItemsChanged -= PaginationState_CurrentPageItemsChanged;
+	}
+
+	private void PaginationState_CurrentPageItemsChanging(object? sender, EventArgs e)
+	{
+		_changing = true;
+		StateHasChanged();
+	}
+
+	private void PaginationState_CurrentPageItemsChanged(object? sender, EventArgs e)
+	{
+		_changing = false;
+		StateHasChanged();
+	}
+}

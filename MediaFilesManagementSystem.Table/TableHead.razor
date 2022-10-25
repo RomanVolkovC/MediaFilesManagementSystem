@@ -1,0 +1,51 @@
+﻿@typeparam TplItem
+@implements IDisposable
+
+<thead class="table-light">
+    <tr>
+        @foreach (var column in TableFacade.Columns.Where(column => !column.IsHidden))
+        {
+            if (column.Filter == null)
+            {
+                <td></td>
+            }
+            else
+            {
+                <FilterCell Filter="column.Filter" />
+            }
+        }
+
+        @if (ShowManagementColumn)
+        {
+            <td></td>
+        }
+    </tr>
+
+    <tr>
+        @foreach (var column in TableFacade.Columns.Where(column => !column.IsHidden))
+        {
+            <NameCell Column="column" TableFacade="TableFacade" />
+        }
+
+        @if (ShowManagementColumn)
+        {
+            <th>Управление</th>
+        }
+    </tr>
+</thead>
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public TableFacade<TplItem> TableFacade { get; init; }
+
+    [Parameter]
+    [EditorRequired]
+    public bool ShowManagementColumn { get; init; }
+
+    protected override void OnInitialized() => TableFacade.ColumnVisibilityChanged += TableFacade_ColumnVisibilityChanged;
+
+    public void Dispose() => TableFacade.ColumnVisibilityChanged -= TableFacade_ColumnVisibilityChanged;
+
+    private void TableFacade_ColumnVisibilityChanged(object? sender, ColumnVisibilityChangedEventArgs<TplItem> e) => StateHasChanged();
+}

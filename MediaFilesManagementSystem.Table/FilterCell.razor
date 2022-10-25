@@ -1,0 +1,17 @@
+﻿<td class="position-relative">
+    <input type="text"
+        class="form-control @(Filter.ErrorMessage == null ? "" : "is-invalid")"
+        @bind-value="Filter.Condition" />
+
+    <div class="invalid-tooltip">
+        @Filter.ErrorMessage
+    </div>
+</td>
+
+@code {
+    private bool _wasError;
+
+    [Parameter]
+    [EditorRequired]
+    public IFilter Filter { get; set; }
+}

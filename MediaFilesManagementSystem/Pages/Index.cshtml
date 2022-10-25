@@ -1,0 +1,11 @@
+﻿@page
+@attribute [Authorize]
+@{
+	ViewBag.Title = "Обзор";
+}
+
+<component type="typeof(MediaFilesManagementSystem.Pages.Shared.Index)"
+	render-mode="ServerPrerendered"
+	param-UserName="User.Identity.Name" />
+
+<script src="_framework/blazor.server.js"></script>

@@ -1,0 +1,32 @@
+﻿@typeparam TplItem
+
+<th @onclick="Header_Clicked">
+    @Column.HeaderName
+
+    @if (Column.ContentOrder == Order.ASK)
+    {
+        @: &#129047;
+    }
+    else if (Column.ContentOrder == Order.DESC)
+    {
+        @: &#129045;
+    }
+</th>
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public IColumn<TplItem> Column { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public TableFacade<TplItem> TableFacade { get; set; }
+
+    private void Header_Clicked(MouseEventArgs e)
+    {
+        if (e.CtrlKey)
+            TableFacade.ChangeAdditionalColumnContentOrder(Column, e.ShiftKey);
+        else
+            TableFacade.ChangeMainColumnContentOrder(Column, e.ShiftKey);
+    }
+}

@@ -1,0 +1,46 @@
+﻿@implements IDisposable
+
+<div class="input-group position-relative">
+	<span class="input-group-text">Страница</span>
+	<input type="number" class="form-control @(_pageNumberToGoToErrorMessage == null ? "" : "is-invalid")" @bind-value="PageNumberToGoTo" />
+	<button class="btn btn-primary" @onclick="PageNumberToGoToButton_Clicked">Перейти</button>
+	<div class="invalid-tooltip">
+		@_pageNumberToGoToErrorMessage
+	</div>
+</div>
+
+@code {
+	private int _pageNumberToGoTo = 1;
+	private string? _pageNumberToGoToErrorMessage;
+
+	[Parameter]
+	[EditorRequired]
+	public IPagination Pagination { get; set; }
+
+	private int PageNumberToGoTo
+	{
+		get => _pageNumberToGoTo;
+		set
+		{
+			_pageNumberToGoTo = value;
+			UpdateErrorMessage();
+		}
+	}
+
+	protected override void OnInitialized() => Pagination.StateChanged += Pagination_StateChanged;
+
+	public void Dispose() => Pagination.StateChanged -= Pagination_StateChanged;
+
+	private void PageNumberToGoToButton_Clicked(MouseEventArgs e)
+	{
+		if (_pageNumberToGoToErrorMessage == null)
+			Pagination.CurrentPageNumber = _pageNumberToGoTo;
+	}
+
+	private void UpdateErrorMessage() =>
+		_pageNumberToGoToErrorMessage = _pageNumberToGoTo < 1 || _pageNumberToGoTo > Pagination.LastPageNumber
+			? $"Номер страницы должен быть больше 0 и меньше {Pagination.LastPageNumber + 1}"
+			: null;
+
+	private void Pagination_StateChanged(object? sender, EventArgs e) => UpdateErrorMessage();
+}

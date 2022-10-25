@@ -1,0 +1,63 @@
+﻿@typeparam TplItem
+@implements IDisposable
+
+<tbody>
+    @foreach (var item in TableFacade.Pagination.CurrentPageItems)
+    {
+        var currentItem = item;
+
+        <tr>
+            @for (int i = 0; i < TableFacade.Columns.Count; i++)
+            {
+                @if (!TableFacade.Columns[i].IsHidden)
+                {
+                    int currentIndex = i;
+
+                    <td>
+                        <span @attributes="TableFacade.Columns[i].CellAttributes" @onclick="SimpleCallback.Create(() => TableFacade.Columns[currentIndex].OnClick?.Invoke(currentItem))">
+                            @TableFacade.Columns[i].GetDisplayedItemValue(item)
+                        </span>
+                    </td>
+                }
+            }
+
+            @if (Buttons.Length > 0)
+            {
+                <td>
+                    <div class="btn-group-vertical">
+                        @foreach (var button in Buttons)
+                        {
+                            <button @onclick="SimpleCallback.Create(() => button.OnClick(currentItem))" @attributes="button.GetAttributes(currentItem)">@button.Name</button>
+                        }
+                    </div>
+                </td>
+            }
+        </tr>
+    }
+</tbody>
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public TableFacade<TplItem> TableFacade { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public Button<TplItem>[] Buttons { get; init; }
+
+    protected override void OnInitialized()
+    {
+        TableFacade.Pagination.CurrentPageItemsChanged += Pagination_CurrentPageItemsChanged;
+        TableFacade.ColumnVisibilityChanged += TableFacade_ColumnVisibilityChanged;
+    }
+
+    public void Dispose()
+    {
+        TableFacade.Pagination.CurrentPageItemsChanged -= Pagination_CurrentPageItemsChanged;
+        TableFacade.ColumnVisibilityChanged -= TableFacade_ColumnVisibilityChanged;
+    }
+
+    private void Pagination_CurrentPageItemsChanged(object? sender, EventArgs e) => StateHasChanged();
+
+    private void TableFacade_ColumnVisibilityChanged(object? sender, ColumnVisibilityChangedEventArgs<TplItem> e) => StateHasChanged();
+}

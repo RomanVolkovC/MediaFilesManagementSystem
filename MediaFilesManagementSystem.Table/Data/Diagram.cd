@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MediaFilesManagementSystem.Table.Data.ColumnContentFilters.EnumFilter&lt;TEnum&gt;">
+    <Position X="12.75" Y="4.75" Width="1.75" />
+    <InheritanceLine Type="MediaFilesManagementSystem.Table.Data.ColumnContentFilters.Filter&lt;TItemValue&gt;" ManuallyRouted="true">
+      <Path>
+        <Point X="16" Y="3.728" />
+        <Point X="16" Y="4.028" />
+        <Point X="14.647" Y="4.028" />
+        <Point X="14.647" Y="4.629" />
+        <Point X="13.625" Y="4.629" />
+        <Point X="13.625" Y="4.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\ColumnContentFilters\EnumFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaFilesManagementSystem.Table.Data.ColumnContentFilters.Filter&lt;TItemValue&gt;">
+    <Position X="15" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAIACAAAAQAAAAAAAAAACAAAIBACAAAAAAAAA=</HashCode>
+      <FileName>Data\ColumnContentFilters\Filter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MediaFilesManagementSystem.Table.Data.ColumnContentFilters.NumberFilter&lt;TItemValue&gt;">
+    <Position X="14.75" Y="4.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="MediaFilesManagementSystem.Table.Data.ColumnContentFilters.NumberFilter&lt;TItemValue&gt;.TryParse">
+        <TypeIdentifier>
+          <NewMemberFileName>Data\ColumnContentFilters\NumberFilter.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <InheritanceLine Type="MediaFilesManagementSystem.Table.Data.ColumnContentFilters.Filter&lt;TItemValue&gt;" FixedToPoint="true">
+      <Path>
+        <Point X="16" Y="3.728" />
+        <Point X="16" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AACAgACAAACAAAAAAgAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\ColumnContentFilters\NumberFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaFilesManagementSystem.Table.Data.ColumnContentFilters.StringFilter&lt;T&gt;">
+    <Position X="13" Y="2.75" Width="1.5" />
+    <InheritanceLine Type="MediaFilesManagementSystem.Table.Data.ColumnContentFilters.Filter&lt;TItemValue&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="16" Y="3.728" />
+        <Point X="16" Y="4.018" />
+        <Point X="14.5" Y="4.018" />
+        <Point X="14.5" Y="4.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\ColumnContentFilters\StringFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaFilesManagementSystem.Table.Data.Button&lt;T&gt;">
+    <Position X="17.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQCABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaFilesManagementSystem.Table.Data.Column&lt;TItem, TItemValue&gt;" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="4.75" Width="2.25" />
+    <AssociationLine Name="Filter" Type="MediaFilesManagementSystem.Table.Data.ColumnContentFilters.Filter&lt;TItemValue&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.312" Y="4.75" />
+        <Point X="17.312" Y="4.329" />
+        <Point X="17.058" Y="4.329" />
+        <Point X="17.058" Y="3.983" />
+        <Point X="16.438" Y="3.983" />
+        <Point X="16.438" Y="3.728" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.479" Y="0.391" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="ContentOrder" Type="MediaFilesManagementSystem.Table.Data.Order" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.25" Y="9" />
+        <Point X="13.438" Y="9" />
+        <Point X="13.438" Y="8.489" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.094" Y="0.207" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAyAAAgAAggAAAAAQABAAACCABAAAAAIAAAAACQAEAA=</HashCode>
+      <FileName>Data\Column.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Filter" />
+      <Property Name="ContentOrder" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MediaFilesManagementSystem.Table.Data.ColumnsContentOrderManager&lt;T&gt;">
+    <Position X="19.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAEAAEAACAABAAABAAAAAAAAAAAAAAAgCAAAAA=</HashCode>
+      <FileName>Data\ColumnsContentOrderManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaFilesManagementSystem.Table.Data.ColumnsFiltersManager&lt;T&gt;">
+    <Position X="19.5" Y="11.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQAAAgAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\ColumnsFiltersManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaFilesManagementSystem.Table.Data.Pagination&lt;TItem&gt;" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="9.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EAAAAIFAESAIAAACAAIAgAAUAAQAAAAARAAEEAAAACA=</HashCode>
+      <FileName>Data\Pagination.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MediaFilesManagementSystem.Table.Data.TableFacade&lt;TItem&gt;" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="4" Width="3" />
+    <AssociationLine Name="_columns" Type="MediaFilesManagementSystem.Table.Data.IColumn&lt;TItem&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="19.75" Y="4.562" />
+        <Point X="18.75" Y="4.562" />
+        <Point X="18.75" Y="4.238" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.888" Y="0.102" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_columnsContentOrderManager" Type="MediaFilesManagementSystem.Table.Data.ColumnsContentOrderManager&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="21.812" Y="4" />
+        <Point X="21.812" Y="3.209" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.029" Y="0.21" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_columnsFiltersManager" Type="MediaFilesManagementSystem.Table.Data.ColumnsFiltersManager&lt;T&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="21.938" Y="7.612" />
+        <Point X="21.938" Y="12.625" />
+        <Point X="21.75" Y="12.625" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.445" Y="3.827" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Pagination" Type="MediaFilesManagementSystem.Table.Data.IPagination&lt;TItem&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="19.938" Y="7.612" />
+        <Point X="19.938" Y="10.125" />
+        <Point X="19.5" Y="10.125" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.44" Y="0.748" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAEAAYAAACAAACAAQAAABAAIIBAEgAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Data\TableFacade.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_columnsContentOrderManager" />
+      <Field Name="_columnsFiltersManager" />
+      <Property Name="Pagination" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_columns" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="MediaFilesManagementSystem.Table.Data.ColumnContentFilters.IFilter">
+    <Position X="13" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAACAAAAQAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\ColumnContentFilters\IFilter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MediaFilesManagementSystem.Table.Data.IColumn&lt;TItem&gt;">
+    <Position X="17.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAiAAAAAAgAAAAAAQABAAACCABAAAAAIAAAAACQAEAA=</HashCode>
+      <FileName>Data\IColumn.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MediaFilesManagementSystem.Table.Data.IPagination&lt;TItem&gt;">
+    <Position X="17.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAEAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\IPagination.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MediaFilesManagementSystem.Table.Data.IPaginationState">
+    <Position X="15.25" Y="9.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAFAAQAAAAAAAAAAAAAUAAAAAAAAQAAAEAAAACA=</HashCode>
+      <FileName>Data\IPaginationState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="MediaFilesManagementSystem.Table.Data.Order">
+    <Position X="12.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAEABAA=</HashCode>
+      <FileName>Data\Order.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

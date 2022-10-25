@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/_content/MediaFilesManagementSystem.Table/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="MediaFilesManagementSystem.styles.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="d-flex flex-column" style="height: 100vh">
+        <nav class="navbar navbar-expand navbar-light bg-light p-4 mb-3">
+            <a asp-page="Index" class="navbar-brand">Таблица</a>
+            <ul class="navbar-nav ms-auto">
+                @if (User.IsInRole(Role.Administrator.ToString()))
+                {
+                    <li class="nav-item">
+                        <a asp-page="Users" class="nav-link @(ViewBag.OnUsersPage == true ? "active" : "")">Пользователи</a>
+                    </li>
+                }
+                <li class="nav-item">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <a asp-page="Logout" class="nav-link">Выйти</a>
+                    }
+                    else
+                    {
+                        <a asp-page="Login" class="nav-link @(ViewBag.OnLoginPage == true ? "active" : "")">Войти</a>
+                    }
+                </li>
+            </ul>
+        </nav>
+        <div class="flex-grow-1 position-relative">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+﻿@typeparam TplItem
+@implements IDisposable
+
+<a name="top"></a>
+
+<TableColumnsVisibility Columns="_tableFacade.Columns" />
+
+@AddNewItem
+
+<div class="row w-100 justify-content-between mb-3">
+	<div class="col-auto">
+		<TablePagesBar Pagination="_tableFacade.Pagination" />
+	</div>
+	
+	<div class="col-auto">
+		<TableNavigatingToSpecificPage Pagination="_tableFacade.Pagination" />
+	</div>
+
+	<div class="col-auto">
+		<TablePageSize Pagination="_tableFacade.Pagination" />
+	</div>
+
+	<div class="col-auto">
+		<LoadingIndicator Pagination="_tableFacade.Pagination" />
+	</div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered mb-0">
+        <TableHead TableFacade="_tableFacade" ShowManagementColumn="Buttons != null" />
+        <TableBody TableFacade="_tableFacade" Buttons="Buttons ?? Array.Empty<Button<TplItem>>()" />
+    </table>
+</div>
+
+@code{
+    private TableFacade<TplItem> _tableFacade;
+
+    [Parameter]
+    [EditorRequired]
+    public IQueryable<TplItem>? Items { get; init; }
+
+    [Parameter]
+    [EditorRequired]
+    public IColumn<TplItem>[]? Columns { get; init; }
+
+    [Parameter]
+    public int PageSize { get; init; } = 50;
+
+    [Parameter]
+    public Button<TplItem>[]? Buttons { get; init; }
+
+    [Parameter]
+    public RenderFragment? AddNewItem { get; init; }
+
+    protected override void OnInitialized()
+    {
+        if (Columns == null)
+            throw new ArgumentNullException(nameof(Columns));
+        if (Items == null)
+            throw new ArgumentNullException(nameof(Items));
+
+        _tableFacade = new(Items, Columns, PageSize);
+    }
+
+    public void CollectionChanged() => _tableFacade.Pagination.CollectionChanged();
+
+    public void Dispose() => _tableFacade.Dispose();
+}

@@ -1,0 +1,17 @@
+﻿<div class="row w-100 mb-3 align-items-center">
+	<div class="col-auto">
+		<div class="input-group">
+			<InputFile class="form-control" OnChange="e => _file = e.File" disabled="@(_adding)" />
+
+			<button class="btn btn-primary" @onclick="AddVideoFile" disabled="@(_adding || _file == null)">Добавить</button>
+		</div>
+	</div>
+	<div class="col-auto">
+		<div class="form-check">
+			<label class="form-check-label">
+				<input class="form-check-input" type="checkbox" @bind-value="_replace" disabled="@_adding">
+				Заменить файл
+			</label>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,49 @@
+﻿@page
+@model LoginModel
+@{
+	ViewBag.Title = "Вход";
+	ViewBag.OnLoginPage = true;
+}
+
+<div class="position-absolute top-50 start-50 translate-middle border border-2 border-primary">
+	<form method="post" class="p-3">
+		<table class="table table-borderless caption-top mb-0">
+			<caption>Форма авторизации</caption>
+			<tbody>
+				<tr>
+					<td>
+						<label asp-for="User.Name" class="pt-2"></label>
+					</td>
+					<td>
+						<input asp-for="User.Name" class="form-control form-control-lg" />
+						<span asp-validation-for="User.Name" class="form-text text-danger"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label asp-for="User.Password" class="pt-2"></label>
+					</td>
+					<td>
+						<input asp-for="User.Password" class="form-control form-control-lg" />
+						<span asp-validation-for="User.Password" class="form-text text-danger"></span>
+					</td>
+				</tr>
+
+				@if (ModelState[""] != null)
+				{
+					<tr>
+						<td colspan="2" class="text-danger">
+							@string.Join("; ", ModelState[""]!.Errors.Select(error => error.ErrorMessage))
+						</td>
+					</tr>
+				}
+					
+				<tr>
+					<td colspan="2">
+						<button type="submit" class="btn btn-primary btn-lg">Войти</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>

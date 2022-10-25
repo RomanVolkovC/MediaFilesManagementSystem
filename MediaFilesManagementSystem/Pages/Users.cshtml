@@ -1,0 +1,60 @@
+﻿@page "{Id:int?}"
+@model UsersModel
+@attribute [Authorize(Roles = nameof(Role.Administrator))]
+@{
+	ViewBag.OnUsersPage = true;
+}
+
+<table class="table table-borderless mb-0">
+	<form method="post">
+		<thead class="sticky-top bg-light">
+			<tr>
+				<th>Имя пользователя</th>
+				<th>Пароль пользователя</th>
+				<th>Роль пользователя</th>
+				<th>Управление</th>
+			</tr>
+			<tr class="align-top">
+				<td>
+					<input asp-for="User.Name" class="form-control" />
+					<span asp-validation-for="User.Name" class="form-text text-danger"></span>
+				</td>
+				<td>
+					<input asp-for="User.Password" class="form-control" />
+					<span asp-validation-for="User.Password" class="form-text text-danger"></span>
+				</td>
+				<td>
+					<select asp-for="User.Role" asp-items="Html.GetEnumSelectList<Role>()" class="form-select"></select>
+					<span asp-validation-for="User.Role" class="form-text text-danger"></span>
+				</td>
+				<td>
+					<button type="submit" asp-page-handler="Add" class="btn btn-primary">Добавить</button>
+				</td>
+			</tr>
+
+			@if (ModelState[""] != null)
+			{
+				<tr>
+					<td colspan="4" class="text-danger">
+						@string.Join("; ", ModelState[""]!.Errors.Select(error => error.ErrorMessage))
+					</td>
+				</tr>
+			}
+
+		</thead>
+		<tbody>
+			@foreach (var user in Model.Context.Users.AsNoTracking())
+			{
+				<tr>
+					<td>@user.Name</td>
+					<td>@user.Password</td>
+					<td>@user.Role</td>
+					<td>
+						<button asp-page-handler="Edit" asp-route-id="@user.Id" type="submit" class="btn btn-primary">Изменить</button>
+						<a asp-page-handler="Delete" asp-route-id="@user.Id" class="btn btn-primary">Удалить</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</form>
+</table>

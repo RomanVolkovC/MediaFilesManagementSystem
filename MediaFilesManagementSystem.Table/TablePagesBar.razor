@@ -1,0 +1,94 @@
+﻿@implements IDisposable
+
+<ul class="pagination mb-0">
+	<li class="page-item @(Pagination.HasPreviousPage ? "" : "disabled")">
+		@if (Pagination.HasPreviousPage)
+		{
+			<a href="#" class="page-link" @onclick="() => Pagination.CurrentPageNumber--">&laquo;</a>
+		}
+		else
+		{
+			<span class="page-link">&laquo;</span>
+		}
+	</li>
+
+	@foreach (int pageNumber in GetPagesNumbers())
+	{
+		bool isSelectedPage = pageNumber == Pagination.CurrentPageNumber;
+		bool isZero = pageNumber == 0;
+
+		<li class="page-item @(isZero ? "disabled" : isSelectedPage ? "active" : "")">
+			@if (isZero)
+			{
+				<a href="#" class="page-link">...</a>
+			}
+			else if (isSelectedPage)
+			{
+				<span class="page-link">@pageNumber</span>
+			}
+			else
+			{
+				int currentPageNumber = pageNumber;
+				<a href="#" class="page-link" @onclick="() => Pagination.CurrentPageNumber = currentPageNumber">@pageNumber</a>
+			}
+		</li>
+	}
+
+	<li class="page-item @(Pagination.HasNextPage ? "" : "disabled")">
+		@if (Pagination.HasNextPage)
+		{
+			<a href="#" class="page-link" @onclick="() => Pagination.CurrentPageNumber++">&raquo;</a>
+		}
+		else
+		{
+			<span class="page-link">&raquo;</span>
+		}
+	</li>
+</ul>
+
+@code {
+	[Parameter]
+	[EditorRequired]
+	public IPagination Pagination { get; set; }
+
+	protected override void OnInitialized() => Pagination.StateChanged += Pagination_StateChanged;
+
+	public void Dispose() => Pagination.StateChanged -= Pagination_StateChanged;
+
+	private int[] GetPagesNumbers()
+	{
+		int[] pagesNumbers;
+
+		if (Pagination.LastPageNumber > 11)
+		{
+			pagesNumbers = new int[11];
+
+			pagesNumbers[0] = 1;
+			pagesNumbers[1] = 2;
+			pagesNumbers[9] = Pagination.LastPageNumber - 1;
+			pagesNumbers[10] = Pagination.LastPageNumber;
+
+			for (int i = 3; i < 8; i++)
+				pagesNumbers[i] = Pagination.CurrentPageNumber - 5 + i;
+
+			if (Pagination.CurrentPageNumber < 7)
+				for (int i = 2; i < 8; i++)
+					pagesNumbers[i] = i + 1;
+
+			if (Pagination.LastPageNumber - Pagination.CurrentPageNumber < 6)
+				for (int i = 3; i < 9; i++)
+					pagesNumbers[i] = Pagination.LastPageNumber - 10 + i;
+		}
+		else
+		{
+			pagesNumbers = new int[Pagination.LastPageNumber];
+
+			for (int i = 0; i < Pagination.LastPageNumber; i++)
+				pagesNumbers[i] = i + 1;
+		}
+
+		return pagesNumbers;
+	}
+
+	private void Pagination_StateChanged(object? sender, EventArgs e) => StateHasChanged();
+}

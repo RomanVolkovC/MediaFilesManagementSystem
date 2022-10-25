@@ -1,0 +1,38 @@
+﻿@typeparam TplItem
+
+<div class="table-responsive mb-3">
+    <table class="table table-bordered mb-0">
+        <tbody>
+            <tr>
+                <th class="table-light">Колонка</th>
+
+                @for (var i = 0; i < Columns.Count; i++)
+                {
+                    <td class="text-center">
+                        <label for="col@(i)">
+                            @Columns[i].HeaderName
+                        </label>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <th class="table-light">Не отображать</th>
+
+                @for (int i = 0; i < Columns.Count; i++)
+                {
+                    int currentColumnIndex = i;
+
+                    <td class="text-center">
+                        <input type="checkbox" class="form-check-input" id="col@(i)" @bind-value="Columns[currentColumnIndex].IsHidden" />
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public IReadOnlyList<IColumn<TplItem>> Columns { get; set; }
+}
